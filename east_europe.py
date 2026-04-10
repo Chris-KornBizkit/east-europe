@@ -37,7 +37,7 @@ def toggle_theme():
     st.session_state.dark_mode = not st.session_state.dark_mode
     save_data()
 
-# [UPDATE] 상단 헤더 디자인 깔끔하게 개선 (배경과 자연스럽게 어우러지도록 수정)
+# 유럽풍 테마 컬러 적용 (Burgundy & Deep Blue)
 if st.session_state.dark_mode:
     page_bg = """
     <style>
@@ -122,7 +122,7 @@ with st.sidebar:
     st.subheader("🎵 Classic Vibe")
     st.video("https://www.youtube.com/embed/videoseries?list=PLW21PjM_K34qQyQh-GkMvL59z1F5s4w-d")
 
-# 4. 헤더 (문구 수정)
+# 4. 헤더
 st.markdown(f"""<div class="wave-header"><h2>Classic Europe ✨</h2><p>A Timeless Journey for Chris.</p></div>""", unsafe_allow_html=True)
 
 # 5. 데이터
@@ -283,24 +283,71 @@ with tab1:
             st.write(r['설명'])
             st.link_button(f"📍 구글 지도 연결", get_map_url(f"{r['장소']} 유럽"))
 
+# [UPDATE] 콘텐츠 대폭 보강 (도시별 맛집 & 뷰포인트)
 with tab2: 
-    st.markdown("### The Hidden Gems")
-    with st.expander("🛍️ High-End Shopping Streets", expanded=True):
+    st.markdown("### 💎 The Hidden Gems & Top Dining")
+    st.caption("※ 모든 레스토랑은 구글 평점 4.5 이상의 검증된 맛집이며, 고급 다이닝의 경우 사전 예약이 필수입니다.")
+    
+    city_tabs = st.tabs(["🇭🇺 부다페스트", "🇦🇹 빈", "🇦🇹 잘츠부르크", "🇨🇿 프라하"])
+    
+    with city_tabs[0]:
+        st.markdown("#### 🍽️ Must-Eat Restaurants (부다페스트)")
         st.markdown(f"""
-        * **빈 콜마르크트(Kohlmarkt) & 그라벤(Graben):** 오스트리아 최고의 명품 거리. 톰브라운, 구찌 등 부티크 밀집 지역. 텍스 리펀 필수!
-        * **프라하 파르지주스카(Pařížská) 거리:** 구시가지 광장에서 이어지는 가로수길. 자크뮈스를 비롯한 하이엔드 브랜드와 감각적인 편집숍 위치.
+        1. **[Costes (코스테스)]({get_map_url('Costes Restaurant Budapest')})**: (★4.7) 헝가리 최초의 미슐랭 1스타. 완벽한 서비스와 예술적인 플레이팅을 자랑하는 파인다이닝.
+        2. **[Menza (멘자)]({get_map_url('Menza Budapest')})**: (★4.5) 부다페스트 굴라쉬(Goulash) 1대장. 오리 가슴살 스테이크도 훌륭한 레트로풍 레스토랑.
+        3. **[Comme Chez Soi (꼼 셰 수아)]({get_map_url('Comme Chez Soi Budapest')})**: (★4.8) 사과를 곁들인 푸아그라 요리가 환상적인 이탈리안 베이스 식당. (예약 필수)
+        4. **[Borkonyha Winekitchen]({get_map_url('Borkonyha Winekitchen Budapest')})**: (★4.7) 와인 페어링이 기가 막힌 미슐랭 1스타. 혁신적인 헝가리 요리를 선보임.
         """)
-    with st.expander("🍷 Fine Dining & Cafes", expanded=True):
+        st.markdown("#### 📸 Secret Viewpoints")
         st.markdown(f"""
-        * **부다페스트 Costes:** 헝가리 최초의 미슐랭 1스타. 완벽한 서비스와 예술적인 플레이팅. (드레스 코드: 스마트 캐주얼)
-        * **빈 Café Central:** 뉴욕 카페와 쌍벽을 이루는 웅장한 인테리어. 피아노 라이브 연주를 들으며 아인슈패너 한 잔.
-        * **프라하 Terasa U Zlaté studně:** 블타바 강과 프라하 성이 가장 아름답게 보이는 뷰 맛집 파인다이닝.
+        * **[Gellért Baths (겔레르트 온천)]({get_map_url('Gellert Baths')})**: 세체니가 너무 붐빈다면 추천. 화려한 아르누보 양식의 타일 장식이 돋보이는 럭셔리 온천.
+        * **[Szimpla Kert (심플라 케르트)]({get_map_url('Szimpla Kert')})**: 오래된 건물을 개조한 부다페스트 특유의 '폐허 펍(Ruin Pub)'. 독특한 예술적 바이브가 넘치는 곳.
+        """)
+        
+    with city_tabs[1]:
+        st.markdown("#### 🍽️ Must-Eat Restaurants (빈)")
+        st.markdown(f"""
+        1. **[Figlmüller (피글뮐러)]({get_map_url('Figlmuller Vienna')})**: (★4.5) 100년 전통의 슈니첼 명가. 얼굴보다 큰 바삭한 돈가스 형태의 전통 요리.
+        2. **[Plachutta (플라후타)]({get_map_url('Plachutta Wollzeile')})**: (★4.6) 오스트리아식 소고기 수육 '타펠슈피츠(Tafelspitz)'의 최고봉. 정갈하고 고급스러운 서비스.
+        3. **[Salm Bräu (살름 브로이)]({get_map_url('Salm Brau Vienna')})**: (★4.5) 벨베데레 궁전 근처. 직접 양조한 크래프트 맥주와 부드러운 폭립이 일품.
+        4. **[Café Central (카페 센트랄)]({get_map_url('Cafe Central Vienna')})**: (★4.5) 프로이트, 트로츠키가 단골이던 가장 화려한 전통 카페. 아인슈패너와 디저트.
+        """)
+        st.markdown("#### 📸 Secret Viewpoints")
+        st.markdown(f"""
+        * **[Hundertwasserhaus (훈데르트바서 하우스)]({get_map_url('Hundertwasserhaus')})**: 자연과 곡선을 사랑한 천재 건축가 훈데르트바서가 디자인한 독특하고 다채로운 색감의 공공 주택.
+        * **[콜마르크트 거리 (Kohlmarkt)]({get_map_url('Kohlmarkt Vienna')})**: 오스트리아 최고의 명품 거리. 톰브라운, 구찌 등 부티크 밀집 지역. 텍스 리펀 필수!
+        """)
+
+    with city_tabs[2]:
+        st.markdown("#### 🍽️ Must-Eat Restaurants (잘츠부르크)")
+        st.markdown(f"""
+        1. **[St. Peter Stiftskulinarium]({get_map_url('St. Peter Stiftskulinarium')})**: (★4.6) 유럽에서 가장 오래된(1200년) 레스토랑. 촛불 아래서 모차르트 음악과 함께하는 디너 코스.
+        2. **[Bärenwirt (베렌비르트)]({get_map_url('Barenwirt Salzburg')})**: (★4.6) 오스트리아식 프라이드 치킨인 '백핸들(Backhendl)'이 가장 맛있는 전통 로컬 맛집.
+        3. **[Augustiner Bräu (아우구스티너 맥주)]({get_map_url('Augustiner Brau Salzburg')})**: (★4.7) 거대한 수도원 맥주 공장. 직접 잔을 씻어 맥주를 받고, 푸드 코트에서 안주를 골라 먹는 축제 같은 분위기.
+        """)
+        st.markdown("#### 📸 Secret Viewpoints")
+        st.markdown(f"""
+        * **[Untersberg (운터스베르크)]({get_map_url('Untersbergbahn')})**: 케이블카를 타고 올라가는 알프스 산맥의 초입. 잘츠부르크 시내와 만년설을 동시에 볼 수 있는 압도적 뷰.
+        * **[Mönchsberg Lift (묀히스베르크 엘리베이터)]({get_map_url('Monchsbergaufzug')})**: 엘리베이터를 타고 단숨에 절벽 위로 올라가, 호엔잘츠부르크 성을 가장 예쁜 구도로 찍을 수 있는 스팟.
+        """)
+
+    with city_tabs[3]:
+        st.markdown("#### 🍽️ Must-Eat Restaurants (프라하)")
+        st.markdown(f"""
+        1. **[Pork's (포크스)]({get_map_url('Porks Prague')})**: (★4.7) 겉바속촉 체코 전통 족발 '꼴레뇨(Koleno)'의 절대 강자. 카를교 근처 위치.
+        2. **[Kantýna (칸티나)]({get_map_url('Kantyna Prague')})**: (★4.6) 프리미엄 정육 식당 스타일. 최고급 체코 소고기 카르파치오와 신선한 생맥주를 입식 테이블에서 즐기는 힙한 공간.
+        3. **[Terasa U Zlaté studně]({get_map_url('Terasa U Zlate studne')})**: (★4.8) 블타바 강과 프라하 성이 한눈에 내려다보이는 뷰 맛집 파인다이닝. 프러포즈 명소로 유명.
+        4. **[Café Savoy (카페 사보이)]({get_map_url('Cafe Savoy Prague')})**: (★4.5) 19세기 말 아름다운 네오 르네상스 천장 아래서 즐기는 고품격 브런치와 핫초코.
+        """)
+        st.markdown("#### 📸 Secret Viewpoints")
+        st.markdown(f"""
+        * **[Vrtbovská zahrada (브르트바 정원)]({get_map_url('Vrtba Garden')})**: 카를교 인근에 숨겨진 계단식 바로크 양식 정원. 번잡한 프라하 시내에서 조용히 인생샷을 남길 수 있는 곳.
+        * **[Letná Park (레트나 공원)]({get_map_url('Letna Park')})**: 블타바 강을 가로지르는 여러 개의 다리를 일렬로 내려다볼 수 있는 최고의 일몰 및 뷰포인트.
         """)
 
 with tab3: 
     st.markdown("### Classic Experiences")
     e1, e2 = st.columns(2)
-    # [UPDATE] 동행인 텍스트 수정
     with e1: st.info("**🎼 빈 오페라 극장 (Staatsoper)**\n미리 좋은 좌석을 예매해 멋지게 드레스업 하고 정통 클래식 오페라 관람하기.")
     with e2: st.success("**🛳️ 부다페스트 프라이빗 요트**\n단체 크루즈 대신 소규모 요트를 렌트해 샴페인을 터트리며 야경을 즐기는 럭셔리 체험.")
 
@@ -310,7 +357,6 @@ with tab4:
     with col_check:
         with st.expander("👔 의류 & 뷰티 (드레스업 필수)", expanded=True):
             st.checkbox("파인다이닝용 정장/자켓")
-            # [UPDATE] 동행인 텍스트 수정
             st.checkbox("포멀한 이브닝 룩 & 구두")
             st.checkbox("편안한 런닝화 (유럽 돌바닥 대비 필수)")
             st.checkbox("짐(Gym) 전용 운동복 & 운동화")
