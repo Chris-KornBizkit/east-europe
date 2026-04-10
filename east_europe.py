@@ -37,26 +37,30 @@ def toggle_theme():
     st.session_state.dark_mode = not st.session_state.dark_mode
     save_data()
 
-# 유럽풍 테마 컬러 적용 (Burgundy & Deep Blue)
+# [UPDATE] 상단 헤더 디자인 깔끔하게 개선 (배경과 자연스럽게 어우러지도록 수정)
 if st.session_state.dark_mode:
     page_bg = """
     <style>
-    .stApp { background-color: #121212; color: #e0e0e0; }
-    .wave-header { background: linear-gradient(90deg, #2c3e50 0%, #1a1a1a 100%); color: #d4af37; border-bottom: 2px solid #d4af37; }
-    .card { background-color: #1e1e1e; color: #e0e0e0; border: 1px solid #444; }
+    .stApp { background-color: #121212; color: #e0e0e0; font-family: "Georgia", serif; }
+    .wave-header { background-color: #1e1e1e; border: 1px solid #333; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    .wave-header h2 { color: #d4af37 !important; font-size: 28px !important; margin: 0; font-weight: 700; letter-spacing: 1px; }
+    .wave-header p { color: #aaa; font-size: 14px; margin: 5px 0 0 0; }
+    .card { background-color: #1e1e1e; color: #e0e0e0; border: 1px solid #444; border-left: 4px solid #d4af37; border-radius: 12px; padding: 22px; margin-bottom: 18px; }
     .weather-row { border-bottom: 1px solid #333; }
-    .streamlit-expanderHeader { background-color: #1e1e1e !important; color: #d4af37 !important; }
+    .streamlit-expanderHeader { background-color: #1e1e1e !important; color: #d4af37 !important; border: 1px solid #333; border-radius: 8px; }
     div[data-testid="stPills"] { gap: 8px; }
     </style>"""
 else:
     page_bg = """
     <style>
-    .stApp { background: linear-gradient(180deg, #fcfcfc 0%, #f5f5dc 100%); font-family: "Georgia", serif; }
-    .wave-header { background: linear-gradient(90deg, #800020 0%, #4a0404 100%); padding: 20px; border-radius: 12px; color: white; text-align: center; margin-bottom: 20px; box-shadow: 0 8px 20px rgba(128,0,32,0.2); }
-    .wave-header h2 { color: #d4af37 !important; font-size: 28px !important; margin: 0; font-weight: 700; letter-spacing: 1px; }
-    .card { background-color: white; padding: 22px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 4px solid #800020; margin-bottom: 18px; }
-    .sos-card { background-color: #fce4ec; border: 1px solid #f8bbd0; padding: 15px; border-radius: 12px; color: #880e4f; }
-    .streamlit-expanderHeader { font-weight: 700; color: #800020; background-color: white; border-radius: 8px; border: 1px solid #eee; }
+    .stApp { background: linear-gradient(180deg, #fafafa 0%, #f4f4f4 100%); font-family: "Georgia", serif; }
+    .wave-header { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border: 1px solid #eaeaea; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+    .wave-header h2 { color: #5a3d2b !important; font-size: 28px !important; margin: 0; font-weight: 700; letter-spacing: 1px; }
+    .wave-header p { color: #777; font-size: 14px; margin: 5px 0 0 0; }
+    .card { background-color: white; padding: 22px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border-left: 4px solid #5a3d2b; margin-bottom: 18px; }
+    .sos-card { background-color: #fdfbfb; border: 1px solid #eee; padding: 15px; border-radius: 12px; color: #5a3d2b; }
+    .streamlit-expanderHeader { font-weight: 700; color: #5a3d2b; background-color: white; border-radius: 8px; border: 1px solid #eee; }
+    div[data-testid="stPills"] { gap: 8px; }
     </style>"""
 st.markdown(page_bg, unsafe_allow_html=True)
 
@@ -118,10 +122,10 @@ with st.sidebar:
     st.subheader("🎵 Classic Vibe")
     st.video("https://www.youtube.com/embed/videoseries?list=PLW21PjM_K34qQyQh-GkMvL59z1F5s4w-d")
 
-# 4. 헤더
-st.markdown(f"""<div class="wave-header"><h2>Classic Europe ✨</h2><p>A Timeless Journey for Chris & Girlfriend.</p></div>""", unsafe_allow_html=True)
+# 4. 헤더 (문구 수정)
+st.markdown(f"""<div class="wave-header"><h2>Classic Europe ✨</h2><p>A Timeless Journey for Chris.</p></div>""", unsafe_allow_html=True)
 
-# 5. 데이터 (입력받은 14일치 완벽 반영)
+# 5. 데이터
 def get_map_url(place): return f"https://www.google.com/maps/search/{urllib.parse.quote(place)}"
 
 itinerary_data = [
@@ -244,7 +248,7 @@ with tab0:
     
     st.markdown("#### 📝 One-Line Diary")
     with st.form("diary_form", clear_on_submit=True):
-        note = st.text_input("오늘 여행에서 가장 로맨틱했던 순간은?")
+        note = st.text_input("오늘 여행에서 가장 기억에 남는 순간은?")
         if st.form_submit_button("기록 (Save)") and note:
             st.session_state.diary.append(f"[{datetime.now(pytz.timezone('Europe/Berlin')).strftime('%m/%d %H:%M')}] {note}")
             save_data()
@@ -296,7 +300,8 @@ with tab2:
 with tab3: 
     st.markdown("### Classic Experiences")
     e1, e2 = st.columns(2)
-    with e1: st.info("**🎼 빈 오페라 극장 (Staatsoper)**\n미리 좋은 좌석을 예매해 여자친구와 드레스업 하고 정통 클래식 오페라 관람하기.")
+    # [UPDATE] 동행인 텍스트 수정
+    with e1: st.info("**🎼 빈 오페라 극장 (Staatsoper)**\n미리 좋은 좌석을 예매해 멋지게 드레스업 하고 정통 클래식 오페라 관람하기.")
     with e2: st.success("**🛳️ 부다페스트 프라이빗 요트**\n단체 크루즈 대신 소규모 요트를 렌트해 샴페인을 터트리며 야경을 즐기는 럭셔리 체험.")
 
 with tab4:
@@ -305,7 +310,8 @@ with tab4:
     with col_check:
         with st.expander("👔 의류 & 뷰티 (드레스업 필수)", expanded=True):
             st.checkbox("파인다이닝용 정장/자켓")
-            st.checkbox("여자친구분 이브닝 드레스 & 구두")
+            # [UPDATE] 동행인 텍스트 수정
+            st.checkbox("포멀한 이브닝 룩 & 구두")
             st.checkbox("편안한 런닝화 (유럽 돌바닥 대비 필수)")
             st.checkbox("짐(Gym) 전용 운동복 & 운동화")
         with st.expander("🔌 전자기기 & 촬영"):
