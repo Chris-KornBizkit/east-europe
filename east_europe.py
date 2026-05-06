@@ -364,6 +364,14 @@ with tab4:
             st.checkbox("유럽용 멀티 어댑터")
             st.checkbox("DJI Pocket 3 / GoPro (야경 브이로그용)")
             st.checkbox("소매치기 방지 폰 스트랩")
+        # [UPDATE] 기차 예매 링크 및 팁 추가
+        with st.expander("🚆 국가 간 기차 예매 (Official Links)", expanded=True):
+            st.markdown("""
+            * **부다페스트 → 빈:** [ÖBB (오스트리아)](https://www.oebb.at/en/) 또는 [MÁV (헝가리)](https://www.mavcsoport.hu/en)
+            * **빈 → 잘츠부르크:** [ÖBB (오스트리아)](https://www.oebb.at/en/) 또는 [Westbahn (사철)](https://westbahn.at/en/)
+            * **잘츠부르크 → 프라하:** [ÖBB (오스트리아)](https://www.oebb.at/en/) 또는 [ČD (체코)](https://www.cd.cz/en/)
+            * **💡 럭셔리 Tip:** ÖBB 예약 시 1등석 요금에 약 €15 추가하여 **'Business Class'**로 업그레이드 강력 추천 (프라이빗 좌석, 웰컴 드링크). 반드시 **좌석 지정(Seat Reservation)** 추가 필수!
+            """)
     with col_tip:
         st.markdown("#### 🚨 안전 & 매너 팁")
         st.warning("**소매치기 주의:** 프라하 카를교, 주요 기차역 탑승 시 소지품 주의.")
