@@ -234,7 +234,7 @@ itinerary_data = [
 df_itinerary = pd.DataFrame(itinerary_data, columns=["날짜", "시간", "구분", "장소", "요약", "설명"])
 
 # 6. 탭 구성
-tab0, tab_map, tab1, tab2, tab3, tab4, tab5 = st.tabs(["🏛️ Overview", "🗺️ Map", "📅 Itinerary", "💎 Secret Spots", "🎭 Experiences", "🎒 Travel Kit", "💰 Wallet"])
+tab0, tab_map, tab1, tab_reservation, tab2, tab3, tab4, tab5 = st.tabs(["🏛️ Overview", "🗺️ Map", "📅 Itinerary", "🛎️ Reservations", "💎 Secret Spots", "🎭 Experiences", "🎒 Travel Kit", "💰 Wallet"])
 
 with tab0:
     st.markdown("### Trip Overview")
@@ -282,6 +282,52 @@ with tab1:
             st.markdown(f"**💡 {r['요약']}**")
             st.write(r['설명'])
             st.link_button(f"📍 구글 지도 연결", get_map_url(f"{r['장소']} 유럽"))
+
+with tab_reservation:
+    st.markdown("### 🛎️ Must-Reserve List")
+    st.caption("※ 인기 다이닝 및 명소, 국가 간 기차는 조기 매진되므로 사전 예약이 필수입니다. 일정 및 날짜순으로 정리되었습니다.")
+
+    st.markdown("#### 🇭🇺 6/7 (일) ~ 6/9 (화) : 부다페스트")
+    st.markdown("""
+    * **🍽️ 파인다이닝 예약 (Costes / Comme Chez Soi)**
+      * [Costes (미슐랭 1스타) 예약](https://costes.hu/en/)
+      * [Comme Chez Soi (인기 이탈리안) 예약](https://www.commechezsoi.hu/)
+    * **🛳️ 6/9 (화) 다뉴브강 야경 크루즈**
+      * [Legenda 야경 크루즈 예약](https://legenda.hu/en)
+    * **🚆 6/10 (수) 기차 이동 (부다페스트 → 빈)**
+      * [ÖBB (오스트리아 철도청) 예매](https://www.oebb.at/en/) (좌석 지정 필수)
+    """)
+
+    st.markdown("#### 🇦🇹 6/10 (수) ~ 6/12 (금) : 빈")
+    st.markdown("""
+    * **🍽️ 주요 다이닝 (Figlmüller / Plachutta)**
+      * [Figlmüller (슈니첼) 예약](https://figlmueller.at/en/)
+      * [Plachutta (타펠슈피츠) 예약](https://www.plachutta.at/en/)
+    * **🏛️ 6/11 (목) 쇤브룬 궁전 & 벨베데레 궁전**
+      * [쇤브룬 궁전 공식 예매](https://www.schoenbrunn.at/en/)
+      * [벨베데레 궁전 상궁 (클림트) 예매](https://www.belvedere.at/en)
+    * **🎭 6/12 (금) 빈 국립 오페라 극장 공연**
+      * [오페라 극장 공식 예매](https://www.wiener-staatsoper.at/en/)
+    * **🚆 6/13 (토) 기차 이동 (빈 → 잘츠부르크)**
+      * [ÖBB 예매](https://www.oebb.at/en/) 또는 [Westbahn 예매](https://westbahn.at/en/)
+    """)
+
+    st.markdown("#### 🇦🇹 6/13 (토) ~ 6/15 (월) : 잘츠부르크")
+    st.markdown("""
+    * **🍽️ 6/13 (토) St. Peter Stiftskulinarium**
+      * [모차르트 디너 콘서트 예약](https://www.stpeter.at/en/)
+    * **🚆 6/16 (화) 기차 이동 (잘츠부르크 → 프라하)**
+      * [ÖBB 예매 (린츠 환승 편)](https://www.oebb.at/en/)
+    """)
+
+    st.markdown("#### 🇨🇿 6/16 (화) ~ 6/20 (토) : 프라하 & 체스키")
+    st.markdown("""
+    * **🍽️ 인기 레스토랑 (Terasa U Zlaté studně / Pork's)**
+      * [Terasa U Zlaté studně (뷰 맛집 파인다이닝) 예약](https://www.terasauzlatestudne.cz/en/)
+      * [Pork's (꼴레뇨 로컬 맛집) 예약](https://www.porks.cz/en/)
+    * **🚌 6/18 (목) 체스키 크룸로프 왕복 이동**
+      * [RegioJet 왕복 버스 예매](https://regiojet.com/) (개별 이동 시 필수)
+    """)
 
 # [UPDATE] 콘텐츠 대폭 보강 (도시별 맛집 & 뷰포인트)
 with tab2: 
