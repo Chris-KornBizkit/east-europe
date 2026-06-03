@@ -79,10 +79,10 @@ def get_europe_weather(lat, lon):
         url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Europe%2FBerlin&forecast_days=3"
         daily = requests.get(url).json()['daily']
         forecasts = []
-        for i in range(3):
+        for i in range(5):
             code = daily['weathercode'][i]
             icon = "☀️" if code < 3 else "☁️" if code < 50 else "🌧️" if code < 80 else "☔"
-            forecasts.append({"day": ["오늘", "내일", "모레"][i], "icon": icon, "max": round(daily['temperature_2m_max'][i]), "min": round(daily['temperature_2m_min'][i])})
+            forecasts.append({"day": ["오늘", "내일", "모레", "3일후", "4일후"][i], "icon": icon, "max": round(daily['temperature_2m_max'][i]), "min": round(daily['temperature_2m_min'][i])})
         return forecasts
     except: return None
 
