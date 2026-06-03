@@ -248,7 +248,10 @@ itinerary_data = [
 df_itinerary = pd.DataFrame(itinerary_data, columns=["날짜", "시간", "구분", "장소", "요약", "설명"])
 
 # 6. 탭 구성
-tab0, tab_map, tab1, tab_reservation, tab2, tab3, tab4, tab5 = st.tabs(["🏛️ Overview", "🗺️ Map", "📅 Itinerary", "🛎️ Reservations", "💎 Secret Spots", "🎭 Experiences", "🎒 Travel Kit", "💰 Wallet"])
+tab0, tab_map, tab1, tab_reservation, tab2, tab_local_picks, tab3, tab4, tab5 = st.tabs([
+    "🏛️ Overview", "🗺️ Map", "📅 Itinerary", "🛎️ Reservations", 
+    "💎 Secret Spots", "🛍️ Local Picks", "🎭 Experiences", "🎒 Travel Kit", "💰 Wallet"
+])
 
 with tab0:
     st.markdown("### Trip Overview")
@@ -404,6 +407,63 @@ with tab2:
         st.markdown(f"""
         * **[Vrtbovská zahrada (브르트바 정원)]({get_map_url('Vrtba Garden')})**: 카를교 인근에 숨겨진 계단식 바로크 양식 정원. 번잡한 프라하 시내에서 조용히 인생샷을 남길 수 있는 곳.
         * **[Letná Park (레트나 공원)]({get_map_url('Letna Park')})**: 블타바 강을 가로지르는 여러 개의 다리를 일렬로 내려다볼 수 있는 최고의 일몰 및 뷰포인트.
+        """)
+
+with tab_local_picks:
+    st.markdown("### 🛍️ Must-Eat & Must-Buy")
+    st.caption("각 도시에서 반드시 맛보아야 할 고유 음식과 기념품 리스트입니다.")
+    
+    local_tabs = st.tabs(["🇭🇺 부다페스트", "🇦🇹 빈", "🇦🇹 잘츠부르크", "🇨🇿 프라하"])
+    
+    with local_tabs[0]:
+        st.markdown("#### 🍲 Must-Eat (고유 음식)")
+        st.markdown("""
+        * **굴라쉬 (Gulyás):** 한국의 육개장과 비슷한 얼큰한 소고기 야채 수프. 한국인 입맛에 가장 잘 맞습니다.
+        * **랑고쉬 (Lángos):** 튀긴 빵 위에 마늘소스, 사워크림, 치즈를 듬뿍 올린 길거리 간식.
+        * **굴뚝빵 (Kürtőskalács):** 숯불에 구워 겉은 바삭하고 속은 촉촉한 헝가리 전통 빵.
+        """)
+        st.markdown("#### 🎁 Must-Buy (특산물)")
+        st.markdown("""
+        * **파프리카 가루:** 헝가리 요리의 핵심. 매운맛(Csípős)과 단맛(Édes)이 있으며 튜브형 페이스트도 추천합니다.
+        * **토카이 아수 (Tokaji Aszú):** 세계 3대 디저트 와인. 푸토뇨쉬(Puttonyos) 숫자가 5 이상인 것을 추천합니다.
+        """)
+
+    with local_tabs[1]:
+        st.markdown("#### 🍲 Must-Eat (고유 음식)")
+        st.markdown("""
+        * **슈니첼 (Schnitzel):** 송아지 고기를 얇게 펴서 튀긴 오스트리아식 돈가스. 크랜베리 잼을 곁들여 먹습니다.
+        * **타펠슈피츠 (Tafelspitz):** 맑은 육수에 삶아낸 소고기 수육 요리로 프란츠 요제프 황제가 즐겨 먹은 것으로 유명합니다.
+        * **자허토르테 (Sachertorte):** 진한 초콜릿 스펀지 케이크에 살구 잼을 바른 빈의 대표 디저트.
+        """)
+        st.markdown("#### 🎁 Must-Buy (특산물)")
+        st.markdown("""
+        * **마너 (Manner) 웨하스:** 빈 여행객의 국민 간식. 분홍색 패키지가 상징적입니다.
+        * **모차르트 쿠겔 초콜릿 (Mirabell 등):** 피스타치오 마지팬이 들어간 초콜릿. 슈퍼마켓에서 쉽게 구매 가능합니다.
+        """)
+
+    with local_tabs[2]:
+        st.markdown("#### 🍲 Must-Eat (고유 음식)")
+        st.markdown("""
+        * **보스나 (Bosna):** 카레 가루와 양파, 머스타드를 듬뿍 넣은 잘츠부르크 스타일의 소시지 핫도그.
+        * **잘츠부르거 녹켈른 (Salzburger Nockerl):** 알프스 산맥을 형상화한 거대하고 부드러운 머랭 디저트.
+        """)
+        st.markdown("#### 🎁 Must-Buy (특산물)")
+        st.markdown("""
+        * **오리지널 모차르트 초콜릿 (Fürst):** 파란색/은색 포장지로 된 '퓌르스트' 카페의 수제 모차르트 초콜릿(원조).
+        * **소금 (Salz):** 잘츠부르크('소금성'이라는 뜻) 지역의 특산물로, 다양한 허브가 섞인 암염이 인기입니다.
+        """)
+
+    with local_tabs[3]:
+        st.markdown("#### 🍲 Must-Eat (고유 음식)")
+        st.markdown("""
+        * **꼴레뇨 (Koleno):** 겉은 바삭하고 속은 쫄깃하게 구워낸 체코식 돼지 무릎(족발) 요리.
+        * **스비치코바 (Svíčková):** 부드러운 소고기 안심에 크림 소스와 크랜베리 잼, 빵(크네들리키)을 곁들인 요리.
+        * **필스너 우르켈 생맥주:** 체코에 오면 물보다 많이 마시게 되는 최고의 라거 맥주.
+        """)
+        st.markdown("#### 🎁 Must-Buy (특산물)")
+        st.markdown("""
+        * **마뉴팍투라 (Manufaktura):** 맥주, 와인 등으로 만든 자연주의 바디케어 브랜드. 맥주 샴푸가 가장 유명합니다.
+        * **베체로브카 (Becherovka):** 소화를 돕는 체코 전통 허브 리큐어. 특유의 계피와 허브 향이 특징입니다.
         """)
 
 with tab3: 
