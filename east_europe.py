@@ -129,7 +129,6 @@ st.markdown(f"""<div class="wave-header"><h2>Classic Europe ✨</h2><p>A Timeles
 def get_map_url(place): return f"https://www.google.com/maps/search/{urllib.parse.quote(place)}"
 
 itinerary_data = [
-    itinerary_data = [
     ["6/7 (일) - 부다페스트", "18:05", "도착", "부다페스트 공항", "공항 도착 및 숙소 이동", "공항 도착 및 이동"],
     ["6/7 (일) - 부다페스트", "19:30", "숙소", "호텔 체크인", "호텔 체크인 및 짐 보관", "호텔 체크인 및 짐 보관"],
     ["6/7 (일) - 부다페스트", "20:30", "석식", "맥도날드", "[저녁] 파인다이닝 (1)", "구시가지 산책 및 첫 파인다이닝 디너"],
