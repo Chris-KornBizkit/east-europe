@@ -79,10 +79,10 @@ def get_europe_weather(lat, lon):
         url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Europe%2FBerlin&forecast_days=3"
         daily = requests.get(url).json()['daily']
         forecasts = []
-        for i in range(5):
+        for i in range(3):
             code = daily['weathercode'][i]
             icon = "☀️" if code < 3 else "☁️" if code < 50 else "🌧️" if code < 80 else "☔"
-            forecasts.append({"day": ["오늘", "내일", "모레", "3일후", "4일후"][i], "icon": icon, "max": round(daily['temperature_2m_max'][i]), "min": round(daily['temperature_2m_min'][i])})
+            forecasts.append({"day": ["오늘", "내일", "모레"][i], "icon": icon, "max": round(daily['temperature_2m_max'][i]), "min": round(daily['temperature_2m_min'][i])})
         return forecasts
     except: return None
 
@@ -143,7 +143,6 @@ itinerary_data = [
     ["6/8 (월) - 부다페스트", "16:00", "관광", "부다 왕궁", "[명소 1] 부다 왕궁", "부다페스트의 상징적인 왕궁 탐방"],
     ["6/8 (월) - 부다페스트", "17:00", "휴식", "숙소 휴식 (1시간)", "", ""],
     ["6/8 (월) - 부다페스트", "19:00", "석식", "저녁 식사", "[저녁] 고급 레스토랑 (3)", "야경 감상 후 고급 다이닝"],
-    ["6/8 (월) - 부다페스트", "20:30", "관광", "다뉴브강 크루즈", "[명소 3] 국회의사당 야경", "로맨틱한 다뉴브강 야경 크루즈"],
     
     ["6/9 (화) - 부다페스트", "07:00", "운동", "웨이트 트레이닝", "오운완", ""],
     ["6/9 (화) - 부다페스트", "09:00", "관광", "세체니 온천", "[명소 1] 피로 회복", "유럽 최대 규모의 온천에서 힐링"],
@@ -156,6 +155,7 @@ itinerary_data = [
     ["6/9 (화) - 부다페스트", "17:00", "관광", "겔레르트 언덕", "[명소 3] 겔레르트 언덕", "일몰 및 야경 감상 포인트"],
     ["6/9 (화) - 부다페스트", "18:30", "석식", "저녁 식사", "일반 로컬 식당", "현지 분위기 물씬 나는 로컬 맛집 탐방"],
     ["6/9 (화) - 부다페스트", "20:00", "관광", "어부의 요새", "[명소 2] 어부의 요새", "도나우 강과 페스트 지구가 한눈에 보이는 명소"],
+    ["6/9 (화) - 부다페스트", "20:30", "관광", "다뉴브강 크루즈", "[명소 3] 국회의사당 야경", "로맨틱한 다뉴브강 야경 크루즈"],
     
     ["6/10 (수) - 빈", "07:00", "운동", "웨이트 트레이닝", "오운완", ""],
     ["6/10 (수) - 빈", "09:30", "이동", "기차 이동", "부다페스트 -> 빈", "약 2시간 30분 소요 편안한 기차 여행"],
@@ -293,8 +293,10 @@ with tab1:
     st.markdown(f"##### {st.session_state.selected_day} Schedule")
     for _, r in df_itinerary[df_itinerary['날짜'] == st.session_state.selected_day].iterrows():
         with st.expander(f"⏰ {r['시간']} | {r['장소']} ({r['구분']})"):
-            st.markdown(f"**💡 {r['요약']}**")
-            st.write(r['설명'])
+            if r['요약']:
+                st.markdown(f"**💡 {r['요약']}**")
+            if r['설명']:
+                st.write(r['설명'])
             st.link_button(f"📍 구글 지도 연결", get_map_url(f"{r['장소']} 유럽"))
 
 with tab_reservation:
@@ -343,7 +345,6 @@ with tab_reservation:
       * [RegioJet 왕복 버스 예매](https://regiojet.com/) (개별 이동 시 필수)
     """)
 
-# [UPDATE] 콘텐츠 대폭 보강 (도시별 맛집 & 뷰포인트)
 with tab2: 
     st.markdown("### 💎 The Hidden Gems & Top Dining")
     st.caption("※ 모든 레스토랑은 구글 평점 4.5 이상의 검증된 맛집이며, 고급 다이닝의 경우 사전 예약이 필수입니다.")
@@ -424,7 +425,6 @@ with tab4:
             st.checkbox("유럽용 멀티 어댑터")
             st.checkbox("DJI Pocket 3 / GoPro (야경 브이로그용)")
             st.checkbox("소매치기 방지 폰 스트랩")
-        # [UPDATE] 기차 예매 링크 및 팁 추가
         with st.expander("🚆 국가 간 기차 예매 (Official Links)", expanded=True):
             st.markdown("""
             * **부다페스트 → 빈:** [ÖBB (오스트리아)](https://www.oebb.at/en/) 또는 [MÁV (헝가리)](https://www.mavcsoport.hu/en)
