@@ -413,6 +413,8 @@ with tab_local_picks:
     st.markdown("### 🛍️ Must-Eat & Must-Buy")
     st.caption("각 도시에서 반드시 맛보아야 할 고유 음식과 기념품 리스트입니다.")
     
+    st.info("**🍑 여름 유럽 공통 추천 (6월):** 현지 마트(Spar, Billa, Tesco 등)나 로컬 시장에 들른다면 제철 과일인 **납작복숭아(Donut Peach)**를 반드시 구매하세요! 일반 복숭아보다 당도가 훨씬 높고 여행 중 간식으로 완벽합니다.")
+    
     local_tabs = st.tabs(["🇭🇺 부다페스트", "🇦🇹 빈", "🇦🇹 잘츠부르크", "🇨🇿 프라하"])
     
     with local_tabs[0]:
@@ -462,6 +464,7 @@ with tab_local_picks:
         """)
         st.markdown("#### 🎁 Must-Buy (특산물)")
         st.markdown("""
+        * **납작복숭아:** 프라하 하벨 시장(Havel's Market) 등에서 가장 쉽게 구입할 수 있습니다. 6월 제철 필수 과일.
         * **마뉴팍투라 (Manufaktura):** 맥주, 와인 등으로 만든 자연주의 바디케어 브랜드. 맥주 샴푸가 가장 유명합니다.
         * **베체로브카 (Becherovka):** 소화를 돕는 체코 전통 허브 리큐어. 특유의 계피와 허브 향이 특징입니다.
         """)
